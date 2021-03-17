@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import CoreData
 
 class CategoryViewController: UIViewController {
     
     @IBOutlet weak var categoryTableview: UITableView!
-    var catArr = [1,2,3,4]
+    var catArr:[Category]?
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//    let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+    
     
     
     override func viewDidLoad() {
@@ -19,10 +23,15 @@ class CategoryViewController: UIViewController {
         
         categoryTableview.delegate = self
         categoryTableview.dataSource = self
+        loadData()
     }
 
     
     @IBAction func savePressed(_ sender: UIButton) {
+        let catObj = Category(context: context)
+        catObj.name = "Vegatables"
+        saveData()
+        categoryTableview.reloadData()
     }
     
     
@@ -31,18 +40,38 @@ class CategoryViewController: UIViewController {
     
     @IBAction func deletePressed(_ sender: UIButton) {
     }
+    
+    func saveData(){
+        do {
+            try context.save()
+        } catch  {
+            print("Error: \(error)")
+        }
+        loadData()
+    }
+    
+    func loadData() {
+        let fetchRequest:NSFetchRequest<Category> = Category.fetchRequest()
+        do {
+            catArr = try context.fetch(fetchRequest)
+        } catch {
+            print("Error:\(error)")
+        }
+    }
 }
 
 //Mark - TableView Delegate Methods
 extension CategoryViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return catArr.count
+        return catArr?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "catCell", for: indexPath)
-        cell.textLabel?.text = "Some"
-        cell.detailTextLabel?.text = "Detail"
+        if let catObj = catArr?[indexPath.row] {
+            cell.textLabel?.text = catObj.name
+        }
+       
         return cell
         
     }

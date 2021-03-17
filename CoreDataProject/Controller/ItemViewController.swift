@@ -10,8 +10,9 @@ import UIKit
 class ItemViewController: UIViewController {
     
     @IBOutlet weak var itemTableview: UITableView!
+    var itemArr:[Item]?
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    var itemArr = [1,2,3]
     
     
     override func viewDidLoad() {
@@ -35,7 +36,7 @@ class ItemViewController: UIViewController {
 //Mark - TableView Delegate Methods
 extension ItemViewController:UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemArr.count
+        return itemArr?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
