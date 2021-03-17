@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E425A6B26017BC50002B572 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E425A6A26017BC50002B572 /* Category.swift */; };
+		8E425A6E26017BD30002B572 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E425A6D26017BD30002B572 /* Item.swift */; };
 		8E43990E25F5E4B500C68DC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E43990D25F5E4B500C68DC4 /* AppDelegate.swift */; };
 		8E43991025F5E4B500C68DC4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E43990F25F5E4B500C68DC4 /* SceneDelegate.swift */; };
 		8E43991225F5E4B500C68DC4 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E43991125F5E4B500C68DC4 /* CategoryViewController.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8E425A6A26017BC50002B572 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		8E425A6D26017BD30002B572 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		8E43990A25F5E4B500C68DC4 /* CoreDataProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E43990D25F5E4B500C68DC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E43990F25F5E4B500C68DC4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +65,8 @@
 		8E38DCB525F5E93200A1F1F9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8E425A6A26017BC50002B572 /* Category.swift */,
+				8E425A6D26017BD30002B572 /* Item.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -171,7 +177,9 @@
 				8E43990E25F5E4B500C68DC4 /* AppDelegate.swift in Sources */,
 				8E50F68825F5E89300C78FA1 /* ItemViewController.swift in Sources */,
 				8E43991825F5E4B500C68DC4 /* CoreDataProject.xcdatamodeld in Sources */,
+				8E425A6E26017BD30002B572 /* Item.swift in Sources */,
 				8E43991025F5E4B500C68DC4 /* SceneDelegate.swift in Sources */,
+				8E425A6B26017BC50002B572 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

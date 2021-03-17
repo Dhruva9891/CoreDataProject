@@ -1,0 +1,13 @@
+//
+//  Item.swift
+//  CoreDataProject
+//
+//  Created by Dhruva Beti on 17/03/21.
+//
+
+import Foundation
+import CoreData
+
+class Item: NSManagedObject {
+    
+}
