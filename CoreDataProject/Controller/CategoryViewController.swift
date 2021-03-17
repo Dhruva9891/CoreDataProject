@@ -36,9 +36,22 @@ class CategoryViewController: UIViewController {
     
     
     @IBAction func updatePressed(_ sender: UIButton) {
+        if let categoryArray = catArr {
+            for catObj in categoryArray {
+                catObj.name = "Fruits"
+            }
+            saveData()
+            categoryTableview.reloadData()
+        }
+        
     }
     
     @IBAction func deletePressed(_ sender: UIButton) {
+        if let catObj = catArr?.first {
+            context.delete(catObj)
+            saveData()
+            categoryTableview.reloadData()
+        }
     }
     
     func saveData(){
