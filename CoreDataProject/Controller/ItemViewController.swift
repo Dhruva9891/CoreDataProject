@@ -6,12 +6,18 @@
 //
 
 import UIKit
+import CoreData
 
 class ItemViewController: UIViewController {
     
     @IBOutlet weak var itemTableview: UITableView!
     var itemArr:[Item]?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var selectedCategory:Category?{
+        didSet{
+            loadData()
+        }
+    }
     
     
     
@@ -23,6 +29,14 @@ class ItemViewController: UIViewController {
 
     
     @IBAction func savePressed(_ sender: UIButton) {
+        if let catObj = selectedCategory {
+            let itemObj = Item.init(context: context)
+            itemObj.name = "Carrot"
+            itemObj.done = false
+            itemObj.parentCategory = catObj
+            saveData()
+            itemTableview.reloadData()
+        }
     }
     
     
@@ -30,6 +44,34 @@ class ItemViewController: UIViewController {
     }
     
     @IBAction func deletePressed(_ sender: UIButton) {
+        
+//        context.delete(itemObj)
+//        saveData()
+//        itemTableview.reloadData()
+    }
+    
+    func saveData() {
+        do {
+            try context.save()
+        } catch  {
+            print("Error:\(error)")
+        }
+        
+        loadData()
+    }
+    
+    func loadData() {
+        let fetchRequest:NSFetchRequest<Item> = Item.fetchRequest()
+//        if let catObjID = selectedCategory?.id {
+//            fetchRequest.predicate = NSPredicate.init(format: "parentCategory.id MATCHES %@", catObjID)
+//        }
+        
+        do {
+            itemArr = try context.fetch(fetchRequest)
+        } catch  {
+            print("Error:\(error)")
+        }
+        
     }
 }
 
@@ -41,8 +83,11 @@ extension ItemViewController:UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath)
-        cell.textLabel?.text = "Some"
-        cell.detailTextLabel?.text = "Detail"
+        if let itemObj = itemArr?[indexPath.row]{
+            cell.textLabel?.text = itemObj.name
+            cell.detailTextLabel?.text = String(itemObj.done)
+        }
+        
         return cell
         
     }

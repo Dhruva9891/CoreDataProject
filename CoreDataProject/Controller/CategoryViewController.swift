@@ -14,8 +14,7 @@ class CategoryViewController: UIViewController {
     var catArr:[Category]?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 //    let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-    
-    
+    var previousID:Int32 = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +29,7 @@ class CategoryViewController: UIViewController {
     @IBAction func savePressed(_ sender: UIButton) {
         let catObj = Category(context: context)
         catObj.name = "Vegatables"
+        catObj.id = generateID()
         saveData()
         categoryTableview.reloadData()
     }
@@ -71,6 +71,26 @@ class CategoryViewController: UIViewController {
             print("Error:\(error)")
         }
     }
+    
+    func generateID() -> Int32 {
+        
+        if let categoryArr = catArr {
+            if categoryArr.count > 0 {
+                var idArr:[Int32] = []
+                
+                for catObj in categoryArr {
+                    idArr.append(catObj.id)
+                }
+                if let id = idArr.max()  {
+                    previousID = id
+                }
+            }
+        }
+        
+        let uniqueID = previousID+1
+        return uniqueID
+        
+    }
 }
 
 //Mark - TableView Delegate Methods
@@ -95,7 +115,12 @@ extension CategoryViewController:UITableViewDelegate,UITableViewDataSource{
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toItemScreen" {
+            
             let destinationVC = segue.destination as! ItemViewController
+            if let index = categoryTableview.indexPathForSelectedRow?.row, let catObj = catArr?[index] {
+                destinationVC.selectedCategory = catObj
+
+            }
         }
     }
     
