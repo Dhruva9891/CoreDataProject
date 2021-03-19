@@ -11,6 +11,9 @@ import CoreData
 class ItemViewController: UIViewController {
     
     @IBOutlet weak var itemTableview: UITableView!
+    
+    @IBOutlet weak var itemSearchBar: UISearchBar!
+    
     var itemArr:[Item]?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var selectedCategory:Category?{

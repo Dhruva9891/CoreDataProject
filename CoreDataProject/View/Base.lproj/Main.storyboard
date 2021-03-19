@@ -48,9 +48,14 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XlP-Al-le7">
                                 <rect key="frame" x="0.0" y="124" width="414" height="738"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="Ddd-PD-vmb">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="catCell" textLabel="F0y-Ny-39Q" style="IBUITableViewCellStyleDefault" id="Cem-22-yYl">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="72" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cem-22-yYl" id="lHC-Pd-o9V">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -83,6 +88,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="7ah-Ny-Qj3"/>
                     <connections>
+                        <outlet property="catSearchBar" destination="Ddd-PD-vmb" id="vkH-su-NN4"/>
                         <outlet property="categoryTableview" destination="XlP-Al-le7" id="s23-hn-25K"/>
                         <segue destination="UlB-bW-O8x" kind="show" identifier="toItemScreen" id="aSt-P5-6Qq"/>
                     </connections>
@@ -131,9 +137,14 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q4X-hr-Lbz">
                                 <rect key="frame" x="0.0" y="124" width="414" height="738"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="nGj-gS-HaN">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="itemCell" textLabel="zqx-HS-4LC" detailTextLabel="M6J-QZ-niU" style="IBUITableViewCellStyleSubtitle" id="CCe-lD-BG1">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="55.5"/>
+                                        <rect key="frame" x="0.0" y="72" width="414" height="55.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CCe-lD-BG1" id="96K-Ef-1nQ">
                                             <rect key="frame" x="0.0" y="0.0" width="370" height="55.5"/>
@@ -173,6 +184,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="8WX-gv-YMX"/>
                     <connections>
+                        <outlet property="itemSearchBar" destination="nGj-gS-HaN" id="nEW-9h-Xid"/>
                         <outlet property="itemTableview" destination="Q4X-hr-Lbz" id="sfp-X4-bDK"/>
                     </connections>
                 </viewController>

@@ -11,6 +11,9 @@ import CoreData
 class CategoryViewController: UIViewController {
     
     @IBOutlet weak var categoryTableview: UITableView!
+    
+    @IBOutlet weak var catSearchBar: UISearchBar!
+    
     var catArr:[Category]?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 //    let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
@@ -22,7 +25,12 @@ class CategoryViewController: UIViewController {
         
         categoryTableview.delegate = self
         categoryTableview.dataSource = self
+        catSearchBar.delegate = self
         loadData()
+        
+        let tapGestureReconizer = UITapGestureRecognizer.init(target: self, action: #selector(tap(sender:)))
+        tapGestureReconizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGestureReconizer)
     }
 
     
@@ -63,8 +71,11 @@ class CategoryViewController: UIViewController {
         loadData()
     }
     
-    func loadData() {
+    func loadData(searchPredicate:NSPredicate? = nil) {
         let fetchRequest:NSFetchRequest<Category> = Category.fetchRequest()
+        if let predicat = searchPredicate {
+            fetchRequest.predicate = predicat
+        }
         do {
             catArr = try context.fetch(fetchRequest)
         } catch {
@@ -125,5 +136,25 @@ extension CategoryViewController:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
+}
+
+//Mark - SearchBar Delegate Methods
+extension CategoryViewController:UISearchBarDelegate{
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.count == 0 {
+            loadData()
+            categoryTableview.reloadData()
+            searchBar.perform(#selector(resignFirstResponder), with: nil, afterDelay: 0.1)
+            return
+        }
+        
+        let predicate = NSPredicate.init(format: "name CONTAINS[c] %@", searchText)
+        loadData(searchPredicate: predicate)
+        categoryTableview.reloadData()
+    }
+    
+    @objc func tap(sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
 }
 
