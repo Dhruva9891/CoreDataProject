@@ -25,6 +25,7 @@ class ItemViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         itemTableview.dataSource = self
+        itemTableview.delegate = self
     }
 
     
@@ -62,9 +63,9 @@ class ItemViewController: UIViewController {
     
     func loadData() {
         let fetchRequest:NSFetchRequest<Item> = Item.fetchRequest()
-//        if let catObjID = selectedCategory?.id {
-//            fetchRequest.predicate = NSPredicate.init(format: "parentCategory.id MATCHES %@", catObjID)
-//        }
+        if let catObjID = selectedCategory?.id {
+            fetchRequest.predicate = NSPredicate.init(format: "parentCategory.id == \(catObjID)")
+        }
         
         do {
             itemArr = try context.fetch(fetchRequest)
@@ -76,7 +77,7 @@ class ItemViewController: UIViewController {
 }
 
 //Mark - TableView Delegate Methods
-extension ItemViewController:UITableViewDataSource{
+extension ItemViewController:UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemArr?.count ?? 0
     }
@@ -92,5 +93,8 @@ extension ItemViewController:UITableViewDataSource{
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
