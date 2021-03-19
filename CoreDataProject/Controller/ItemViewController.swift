@@ -42,13 +42,24 @@ class ItemViewController: UIViewController {
     
     
     @IBAction func updatePressed(_ sender: UIButton) {
+        if let itemArray = itemArr {
+            for itemObj in itemArray {
+                itemObj.name = "Potato"
+                itemObj.done = true
+            }
+            saveData()
+            itemTableview.reloadData()
+        }
+        
     }
     
     @IBAction func deletePressed(_ sender: UIButton) {
         
-//        context.delete(itemObj)
-//        saveData()
-//        itemTableview.reloadData()
+        if let itemObj = itemArr?.first{
+            context.delete(itemObj)
+            saveData()
+            itemTableview.reloadData()
+        }
     }
     
     func saveData() {
