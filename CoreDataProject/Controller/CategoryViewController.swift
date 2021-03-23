@@ -144,7 +144,6 @@ extension CategoryViewController:UISearchBarDelegate{
         if searchText.count == 0 {
             loadData()
             categoryTableview.reloadData()
-            searchBar.perform(#selector(resignFirstResponder), with: nil, afterDelay: 0.1)
             return
         }
         
