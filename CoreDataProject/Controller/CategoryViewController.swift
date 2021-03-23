@@ -16,7 +16,7 @@ class CategoryViewController: UIViewController {
     
     var catArr:[Category]?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//    let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+    let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
     var previousID:Int32 = 0
     
     override func viewDidLoad() {
