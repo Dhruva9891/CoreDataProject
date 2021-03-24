@@ -136,6 +136,23 @@ extension CategoryViewController:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction.init(style: .destructive, title: "Delete") { (contextualAction, view, completionHandler) in
+            
+            if let catObj = self.catArr?[indexPath.row] {
+                self.context.delete(catObj)
+                self.saveData()
+                self.categoryTableview.reloadData()
+            }
+        }
+        
+        delete.backgroundColor = .systemRed
+        delete.image = UIImage.init(named: "Trash Icon")
+        
+        let configuration = UISwipeActionsConfiguration.init(actions: [delete])
+        return configuration
+    }
+    
 }
 
 //Mark - SearchBar Delegate Methods
