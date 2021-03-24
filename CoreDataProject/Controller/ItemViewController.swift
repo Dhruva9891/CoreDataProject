@@ -126,6 +126,26 @@ extension ItemViewController:UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let delete = UIContextualAction.init(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+            
+            if let itemObj = self.itemArr?[indexPath.row]{
+                self.context.delete(itemObj)
+                self.saveData()
+                self.itemTableview.reloadData()
+            }
+        }
+        
+        delete.backgroundColor = .systemRed
+        delete.image = UIImage.init(named: "Trash Icon")
+        
+        
+        let configuration = UISwipeActionsConfiguration.init(actions: [delete])
+        return configuration
+        
+    }
 }
 
 //Mark - SearchBar Delegate Methods
